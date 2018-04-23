@@ -1,0 +1,83 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace CAL
+{
+    public partial class Calculator : Form
+    {
+        Double value = 0;
+        String op = "";
+        bool op_pressed = false;
+        public Calculator()
+        {
+            InitializeComponent();
+        }
+
+        private void Op_Click(object sender, EventArgs e)
+        {
+            Button b = (Button)sender;
+            op = b.Text;
+            value =Double.Parse(Result.Text);
+            op_pressed = true;
+            equation.Text = value + "" + op;
+        }
+
+        private void CE_Click(object sender, EventArgs e)
+        {
+            Result.Text = "0";
+        }
+
+        private void Int_Click(object sender, EventArgs e)
+        {
+            if ((Result.Text == "0")||(op_pressed))
+                Result.Clear();
+            op_pressed = false;
+            Button b = (Button)sender;
+            Result.Text = Result.Text + b.Text;
+        }
+
+        private void Dot_Click(object sender, EventArgs e)
+        {
+            if (Result.Text == "0")
+                Result.Clear();
+            Button b = (Button)sender;
+            Result.Text = Result.Text + b.Text;
+        }
+
+        private void Equal_Click(object sender, EventArgs e)
+        {
+            equation.Text = "";
+            switch (op)
+            {
+                case "+":
+                    Result.Text = (value + Double.Parse(Result.Text)).ToString();
+                    break;
+                case "-":
+                    Result.Text = (value - Double.Parse(Result.Text)).ToString();
+                    break;
+                case "*":
+                    Result.Text = (value * Double.Parse(Result.Text)).ToString();
+                    break;
+                case "/":
+                    Result.Text = (value / Double.Parse(Result.Text)).ToString();
+                    break;
+                default:
+                    break;
+            }
+
+        }
+
+        private void Clear_Click(object sender, EventArgs e)
+        {
+            Result.Text= "0";
+            value = 0;
+        }
+    }
+}
