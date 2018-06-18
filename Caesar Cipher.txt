@@ -16,10 +16,15 @@ namespace Caesar_Cipher
 
                 return ch;
             }
-
-            char d = char.IsUpper(ch) ? 'A' : 'a';
-            return (char)((((ch + key) - d) % 26) + d);
-
+            if (key > 0)
+            {
+                char d = char.IsUpper(ch) ? 'A' : 'a';
+                return (char)((((ch + key) - d) % 26) + d);
+            }
+            else {
+                char d = char.IsUpper(ch) ? 'Z' : 'z';
+                return (char)((((ch + key) - d) % 26) + d);
+            }
 
         }
 
